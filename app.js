@@ -1,6 +1,9 @@
 let gameSeq=[];
 let userSeq= [];
 
+let score=0;
+let maxScore=0;
+
 let btns=['yellow','red','purple','green']
 
 let started=false;
@@ -59,7 +62,13 @@ function checkAns(idx){
             setTimeout(levelUp,1000);
         }
     }else{
-        h2.innerHTML=`Game Over! Your score was <b>${level}</b>. <br>Press any key to restart.`
+        score=level;
+        if(maxScore<score) maxScore=score;
+        h2.innerHTML=`Game Over! Your score was <b>${score}</b>. <br>Press any key to restart. <br> Max High Score: ${maxScore}`
+        document.querySelector('body').style.backgroundColor='red';
+        setTimeout(()=>{
+            document.querySelector('body').style.backgroundColor='white';
+        },150);
         reset();
     }
 }
@@ -86,4 +95,5 @@ function reset() {
     gameSeq=[];
     userSeq=[];
     level=0;
+    score=0;
 }
